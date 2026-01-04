@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="tcss305-a1b-model">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/tcss305-a1b-model.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

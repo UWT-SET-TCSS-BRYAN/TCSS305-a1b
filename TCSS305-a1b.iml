@@ -10,7 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="25" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit5.8.1">
@@ -28,5 +28,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="tcss305-model-1b" level="project" />
+    <orderEntry type="library" name="tcss305-a1b-model" level="project" />
+    <orderEntry type="library" name="google.code.gson" level="project" />
   </component>
 </module>
