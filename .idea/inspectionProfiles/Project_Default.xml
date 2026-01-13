@@ -207,7 +207,7 @@
     <inspection_tool class="DeprecatedMavenDependency" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="DestructuringWrongName" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="DevKitPropertiesMessageValidation" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="DiamondCanBeReplacedWithExplicitTypeArguments" enabled="true" level="WEAK WARNING" enabled_by_default="true" editorAttributes="INFO_ATTRIBUTES" />
+    <inspection_tool class="DiamondCanBeReplacedWithExplicitTypeArguments" enabled="false" level="WEAK WARNING" enabled_by_default="true" editorAttributes="INFO_ATTRIBUTES" />
     <inspection_tool class="DifferentKotlinGradleVersion" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="DifferentKotlinMavenVersion" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="DifferentMavenStdlibVersion" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -804,7 +804,7 @@
     <inspection_tool class="PropertyName" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="ProtectedInFinal" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="PsiElementConcatenation" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="PublicMethodNotExposedInInterface" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="PublicMethodNotExposedInInterface" enabled="false" level="WARNING" enabled_by_default="true">
       <option name="ignorableAnnotations">
         <value />
       </option>
@@ -1249,7 +1249,7 @@
     <inspection_tool class="YAMLSchemaValidation" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="YAMLUnresolvedAlias" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="YAMLUnusedAnchor" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="unused" enabled="true" level="WARNING" enabled_by_default="true" checkParameterExcludingHierarchy="true">
+    <inspection_tool class="unused" enabled="false" level="WARNING" enabled_by_default="true" checkParameterExcludingHierarchy="true">
       <option name="LOCAL_VARIABLE" value="true" />
       <option name="FIELD" value="true" />
       <option name="METHOD" value="false" />

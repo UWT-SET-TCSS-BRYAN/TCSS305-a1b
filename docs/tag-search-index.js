@@ -1,0 +1,1 @@
+tagSearchIndex = [{"l":"Class Hierarchy","h":"package edu.uw.tcss.model","k":"16","u":"edu/uw/tcss/model/package-summary.html#class-hierarchy-heading"}];updateSearchResults();
