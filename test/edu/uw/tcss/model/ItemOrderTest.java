@@ -1,7 +1,7 @@
 /*
  * TCSS 305 - Assignment 1b
  *
- * This is an example test class demonstrating JUnit 5 testing patterns.
+ * This is an example test class demonstrating JUnit 6 testing patterns.
  * Study this file carefully before writing your own tests.
  */
 
@@ -24,10 +24,27 @@ import org.junit.jupiter.api.Test;
  *   <li>Organizing tests by functionality</li>
  * </ul>
  *
- * @author TCSS 305 Instructors
- * @version Winter 2026
+ * @author Charles Bryan
+ * @version Autumn 2026
  */
 class ItemOrderTest {
+
+    /*
+     * Test data is pulled out into constants rather than repeated in every test.
+     * Checkstyle flags a string literal that appears more than once
+     * (MultipleStringLiterals) and an unexplained number (MagicNumber), so
+     * repeating "Pen" or 5 in a dozen tests would generate a dozen warnings.
+     * Do the same in your own test classes.
+     */
+
+    /** Item name shared by the tests below. */
+    private static final String ITEM_NAME = "Pen";
+
+    /** Item price shared by the tests below. */
+    private static final BigDecimal ITEM_PRICE = new BigDecimal("1.99");
+
+    /** Order quantity shared by the tests below. */
+    private static final int QUANTITY = 5;
 
     // ============ Constructor Tests ============
 
@@ -36,8 +53,8 @@ class ItemOrderTest {
      */
     @Test
     void testConstructorWithValidArguments() {
-        final Item item = new StoreItem("Pen", new BigDecimal("1.99"));
-        final ItemOrder order = new ItemOrder(item, 5);
+        final Item item = new StoreItem(ITEM_NAME, ITEM_PRICE);
+        final ItemOrder order = new ItemOrder(item, QUANTITY);
 
         assertNotNull(order, "Constructor should create a non-null ItemOrder");
     }
@@ -47,7 +64,7 @@ class ItemOrderTest {
      */
     @Test
     void testConstructorWithZeroQuantity() {
-        final Item item = new StoreItem("Pen", new BigDecimal("1.99"));
+        final Item item = new StoreItem(ITEM_NAME, ITEM_PRICE);
         final ItemOrder order = new ItemOrder(item, 0);
 
         assertEquals(0, order.quantity(), "Quantity of zero should be allowed");
@@ -55,11 +72,19 @@ class ItemOrderTest {
 
     /**
      * Test constructor rejects null item with NullPointerException.
+     *
+     * <p>IntelliJ flags the {@code null} below because {@code ItemOrder}'s
+     * component is annotated non-null, and it is right that no working program
+     * would pass null here. Passing it anyway is the entire point of the test:
+     * it proves the constructor rejects null instead of storing it. The
+     * warning survives a correct implementation, so it is suppressed rather
+     * than removed -- deleting the case would delete the guard.
      */
+    @SuppressWarnings("DataFlowIssue")
     @Test
     void testConstructorRejectsNullItem() {
         assertThrows(NullPointerException.class,
-            () -> new ItemOrder(null, 5),
+            () -> new ItemOrder(null, QUANTITY),
             "Constructor should throw NullPointerException for null item");
     }
 
@@ -68,7 +93,7 @@ class ItemOrderTest {
      */
     @Test
     void testConstructorRejectsNegativeQuantity() {
-        final Item item = new StoreItem("Pen", new BigDecimal("1.99"));
+        final Item item = new StoreItem(ITEM_NAME, ITEM_PRICE);
 
         assertThrows(IllegalArgumentException.class,
             () -> new ItemOrder(item, -1),
@@ -82,8 +107,8 @@ class ItemOrderTest {
      */
     @Test
     void testItemAccessor() {
-        final Item item = new StoreItem("Pen", new BigDecimal("1.99"));
-        final ItemOrder order = new ItemOrder(item, 5);
+        final Item item = new StoreItem(ITEM_NAME, ITEM_PRICE);
+        final ItemOrder order = new ItemOrder(item, QUANTITY);
 
         assertSame(item, order.item(),
             "item() should return the same Item passed to constructor");
@@ -94,10 +119,10 @@ class ItemOrderTest {
      */
     @Test
     void testQuantityAccessor() {
-        final Item item = new StoreItem("Pen", new BigDecimal("1.99"));
-        final ItemOrder order = new ItemOrder(item, 5);
+        final Item item = new StoreItem(ITEM_NAME, ITEM_PRICE);
+        final ItemOrder order = new ItemOrder(item, QUANTITY);
 
-        assertEquals(5, order.quantity(),
+        assertEquals(QUANTITY, order.quantity(),
             "quantity() should return the quantity passed to constructor");
     }
 
@@ -105,11 +130,17 @@ class ItemOrderTest {
 
     /**
      * Test equals() is reflexive: an object equals itself.
+     *
+     * <p>IntelliJ flags comparing a value with itself as a likely typo. Here it
+     * is deliberate: reflexivity is the first clause of the {@code equals}
+     * contract, and a class can genuinely break it. The warning survives a
+     * correct implementation, so it is suppressed rather than removed.
      */
+    @SuppressWarnings("EqualsWithItself")
     @Test
     void testEqualsReflexive() {
-        final Item item = new StoreItem("Pen", new BigDecimal("1.99"));
-        final ItemOrder order = new ItemOrder(item, 5);
+        final Item item = new StoreItem(ITEM_NAME, ITEM_PRICE);
+        final ItemOrder order = new ItemOrder(item, QUANTITY);
 
         assertEquals(order, order, "An ItemOrder should equal itself");
     }
@@ -119,9 +150,9 @@ class ItemOrderTest {
      */
     @Test
     void testEqualsSymmetric() {
-        final Item item = new StoreItem("Pen", new BigDecimal("1.99"));
-        final ItemOrder order1 = new ItemOrder(item, 5);
-        final ItemOrder order2 = new ItemOrder(item, 5);
+        final Item item = new StoreItem(ITEM_NAME, ITEM_PRICE);
+        final ItemOrder order1 = new ItemOrder(item, QUANTITY);
+        final ItemOrder order2 = new ItemOrder(item, QUANTITY);
 
         assertEquals(order1, order2, "Equal ItemOrders should be equal");
         assertEquals(order2, order1, "Equality should be symmetric");
@@ -132,8 +163,8 @@ class ItemOrderTest {
      */
     @Test
     void testEqualsWithNull() {
-        final Item item = new StoreItem("Pen", new BigDecimal("1.99"));
-        final ItemOrder order = new ItemOrder(item, 5);
+        final Item item = new StoreItem(ITEM_NAME, ITEM_PRICE);
+        final ItemOrder order = new ItemOrder(item, QUANTITY);
 
         assertNotEquals(null, order, "ItemOrder should not equal null");
     }
@@ -143,10 +174,10 @@ class ItemOrderTest {
      */
     @Test
     void testEqualsWithDifferentItem() {
-        final Item item1 = new StoreItem("Pen", new BigDecimal("1.99"));
+        final Item item1 = new StoreItem(ITEM_NAME, ITEM_PRICE);
         final Item item2 = new StoreItem("Pencil", new BigDecimal("0.99"));
-        final ItemOrder order1 = new ItemOrder(item1, 5);
-        final ItemOrder order2 = new ItemOrder(item2, 5);
+        final ItemOrder order1 = new ItemOrder(item1, QUANTITY);
+        final ItemOrder order2 = new ItemOrder(item2, QUANTITY);
 
         assertNotEquals(order1, order2,
             "ItemOrders with different items should not be equal");
@@ -157,8 +188,8 @@ class ItemOrderTest {
      */
     @Test
     void testEqualsWithDifferentQuantity() {
-        final Item item = new StoreItem("Pen", new BigDecimal("1.99"));
-        final ItemOrder order1 = new ItemOrder(item, 5);
+        final Item item = new StoreItem(ITEM_NAME, ITEM_PRICE);
+        final ItemOrder order1 = new ItemOrder(item, QUANTITY);
         final ItemOrder order2 = new ItemOrder(item, 10);
 
         assertNotEquals(order1, order2,
@@ -172,9 +203,9 @@ class ItemOrderTest {
      */
     @Test
     void testHashCodeConsistentWithEquals() {
-        final Item item = new StoreItem("Pen", new BigDecimal("1.99"));
-        final ItemOrder order1 = new ItemOrder(item, 5);
-        final ItemOrder order2 = new ItemOrder(item, 5);
+        final Item item = new StoreItem(ITEM_NAME, ITEM_PRICE);
+        final ItemOrder order1 = new ItemOrder(item, QUANTITY);
+        final ItemOrder order2 = new ItemOrder(item, QUANTITY);
 
         assertEquals(order1, order2, "Orders should be equal");
         assertEquals(order1.hashCode(), order2.hashCode(),
@@ -186,8 +217,8 @@ class ItemOrderTest {
      */
     @Test
     void testHashCodeConsistent() {
-        final Item item = new StoreItem("Pen", new BigDecimal("1.99"));
-        final ItemOrder order = new ItemOrder(item, 5);
+        final Item item = new StoreItem(ITEM_NAME, ITEM_PRICE);
+        final ItemOrder order = new ItemOrder(item, QUANTITY);
 
         final int hashCode1 = order.hashCode();
         final int hashCode2 = order.hashCode();
@@ -204,8 +235,8 @@ class ItemOrderTest {
      */
     @Test
     void testToStringNotEmpty() {
-        final Item item = new StoreItem("Pen", new BigDecimal("1.99"));
-        final ItemOrder order = new ItemOrder(item, 5);
+        final Item item = new StoreItem(ITEM_NAME, ITEM_PRICE);
+        final ItemOrder order = new ItemOrder(item, QUANTITY);
 
         final String str = order.toString();
 

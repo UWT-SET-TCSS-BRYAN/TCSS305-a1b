@@ -48,7 +48,9 @@
 
     <!-- Removed: MissingJavadocPackage (confuses students) -->
 
-    <module name="JavadocStyle"/>
+    <!-- JavadocStyle was removed in Checkstyle 13.0.0; SummaryJavadoc is its
+         designated replacement (first sentence present, ends with a period). -->
+    <module name="SummaryJavadoc"/>
 
     <module name="JavadocType">
       <property name="authorFormat" value=".+"/>
@@ -112,7 +114,8 @@
 
     <!-- Modern Java naming -->
     <module name="LambdaParameterName">
-      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+      <!-- '_' is a legal unnamed parameter as of Java 22 (JEP 456) -->
+      <property name="format" value="^(_|[a-z][a-zA-Z0-9]*)$"/>
     </module>
 
     <module name="PatternVariableName">

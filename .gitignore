@@ -1,3 +1,17 @@
+### Gradle ###
+# The IntelliJ project is a plain JAVA_MODULE and does not use Gradle
+# (no .idea/gradle.xml). The Gradle build is kept locally for headless/CI
+# test runs only and is deliberately not shipped in the student starter.
+.gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+build.gradle
+settings.gradle
+gradlew
+gradlew.bat
+gradle/
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
@@ -27,3 +41,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Claude Code ###
+CLAUDE.md
+.claude/
