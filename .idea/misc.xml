@@ -7,7 +7,7 @@
     <option name="options">
       <map>
         <entry key="Statistics URL" value="" />
-        <entry key="Target JDK" value="21" />
+        <entry key="Target JDK" value="25" />
       </map>
     </option>
   </component>
