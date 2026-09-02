@@ -1,7 +1,8 @@
 ### Gradle ###
-# The IntelliJ project is a plain JAVA_MODULE and does not use Gradle
-# (no .idea/gradle.xml). The Gradle build is kept locally for headless/CI
-# test runs only and is deliberately not shipped in the student starter.
+# This project does NOT use Gradle. Tests, Checkstyle, and inspections are all
+# run through the JetBrains MCP server against the plain JAVA_MODULE, so there
+# is no second build system to keep in sync. These rules are kept only so that
+# if a build is ever reintroduced it cannot reach students by accident.
 .gradle/
 build/
 !**/src/main/**/build/
