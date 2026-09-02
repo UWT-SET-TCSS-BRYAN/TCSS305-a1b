@@ -5,57 +5,69 @@
  * Run this file first to watch the API work, then start on your test classes.
  *
  * This file is provided as a reference. You do not need to modify it.
- *
- * @author Charles Bryan
- * @version Autumn 2026
  */
 
-// This file is a COMPACT SOURCE FILE (JEP 512, final in Java 25). Four things
-// about it are new syntax you have probably not seen in TCSS 142/143:
-//
-// 1. There is no 'class' declaration. The compiler wraps everything below in a
-//    class for you, so a file that is just a main method does not need the
-//    "public class Foo { ... }" ceremony.
-// 2. There is no 'package' statement, and there cannot be one: an implicitly
-//    declared class always lives in the unnamed package. That is why this file
-//    has no package line even though it sits in src/edu/uw/tcss/app/.
-// 3. 'BigDecimal' is used below with no import for it. A compact source file
-//    implicitly imports every package the java.base module exports, so
-//    java.math.BigDecimal resolves for free. This does NOT apply to your test
-//    classes -- those are ordinary source files in a package, so they need the
-//    usual "import java.math.BigDecimal;" line.
-// 4. main() is an INSTANCE main method: no 'public', no 'static', and no
-//    String[] parameter. Java 25 lets main() be declared this way.
-//
-// java.lang.IO is also new in Java 25: a small console-I/O class holding
-// println/readln. It still has to be imported, unlike the java.base packages
-// in point 3 above.
+package edu.uw.tcss.app;
 
 import static java.lang.IO.println;
 
 import edu.uw.tcss.model.StoreItem;
+import java.math.BigDecimal;
 
 /**
  * Prints the result of every public {@code StoreItem} method to the console.
  *
  * <p>Compare this output against the API specification in the assignment
  * instructions. Anywhere the two disagree is a candidate for a bug report.
+ *
+ * <p>Two notes on the Java 25 syntax here. The {@code println} calls come from
+ * {@code java.lang.IO}, a small console-I/O class new in this release, so
+ * printing no longer has to go through {@code System.out}. Java 25 also added
+ * compact source files, which would let a file this short drop the class
+ * declaration and the package line and simply declare {@code void main()}.
+ * This file deliberately does not use that form, because Checkstyle cannot
+ * parse it yet. A language feature and the tools that check it do not arrive
+ * together, and on a real team the tool everyone already depends on usually
+ * decides the argument.
+ *
+ * @author Charles Bryan
+ * @version Autumn 2026
  */
-void main() {
-    final StoreItem laptop = new StoreItem("Laptop", BigDecimal.valueOf(999.99));
+public final class StoreItemDemo {
 
-    // toString() is a debug representation. Its format is not part of the
-    // specification, so do not write tests that depend on it.
-    println("toString():               " + laptop);
+    /** Unit price of the item used in the demonstration. */
+    private static final BigDecimal LAPTOP_PRICE = BigDecimal.valueOf(999.99);
 
-    println("getName():                " + laptop.getName());
-    println("getPrice():               " + laptop.getPrice());
+    /** Quantity used in the calculateTotal demonstrations. */
+    private static final int DEMO_QUANTITY = 2;
 
-    // The second argument is the membership flag. StoreItem has no bulk price,
-    // so it ignores that flag -- both calls below print the same total.
-    // StoreBulkItem is the class where the flag actually changes the answer.
-    println("calculateTotal(2, false): " + laptop.calculateTotal(2, false));
-    println("calculateTotal(2, true):  " + laptop.calculateTotal(2, true));
+    private StoreItemDemo() {
+        super();
+    }
 
-    println("getFormattedDescription(): " + laptop.getFormattedDescription());
+    /**
+     * Prints every public {@code StoreItem} method to the console.
+     *
+     * @param args command line arguments, ignored
+     */
+    public static void main(final String[] args) {
+        final StoreItem laptop = new StoreItem("Laptop", LAPTOP_PRICE);
+
+        // toString() is a debug representation. Its format is not part of the
+        // specification, so do not write tests that depend on it.
+        println("toString():                " + laptop);
+
+        println("getName():                 " + laptop.getName());
+        println("getPrice():                " + laptop.getPrice());
+
+        // The second argument is the membership flag. StoreItem has no bulk
+        // price, so it ignores that flag and both calls below print the same
+        // total. StoreBulkItem is the class where the flag changes the answer.
+        println("calculateTotal(2, false):  "
+                + laptop.calculateTotal(DEMO_QUANTITY, false));
+        println("calculateTotal(2, true):   "
+                + laptop.calculateTotal(DEMO_QUANTITY, true));
+
+        println("getFormattedDescription(): " + laptop.getFormattedDescription());
+    }
 }
