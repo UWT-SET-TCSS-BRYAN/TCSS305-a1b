@@ -35,7 +35,7 @@ a1b-<your-username>/
 The model classes you are testing are documented here:
 https://uwt-set-tcss-bryan.github.io/TCSS305-a1b/edu/uw/tcss/model/package-summary.html
 
-The same Javadoc is in this repository under `docs/` — open `docs/index.html` in a
+The same Javadoc is in this repository under `docs/`. Open `docs/index.html` in a
 browser to read it offline.
 
 ## Getting Started
